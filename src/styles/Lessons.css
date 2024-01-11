@@ -1,0 +1,85 @@
+.lessonsItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    margin: 20px;
+    width: 300px; /* Adjust the width as needed */
+    opacity: 0; /* Set initial opacity to 0 */
+    animation: fadeIn 0.5s ease-in-out forwards; /* Use fadeIn animation */
+  }
+  
+  .lessonsItem img {
+    width: auto;
+    height: 200px; /* Set a fixed height for the images */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    animation-delay: 0.5s; /* Delay the animation for the image */
+  }
+  
+  .lessonsItem button {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-size: large;
+    background-color: #00234D;
+    color: #fff;
+    border-radius: 30px;
+    width: 100%;
+    height: 100px; /* Set a fixed height for the buttons */
+    margin-top: 20px;
+    order: 1; /* Move the buttons below the images */
+    margin-bottom: 50px;
+    opacity: 0; /* Set initial opacity to 0 */
+    animation: fadeIn 0.5s ease-in-out forwards; /* Use fadeIn animation */
+    animation-delay: 1s; /* Delay the animation for the button */
+  }
+  
+  .lessonsItem button:hover {
+    background-color: #67b3da;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .lessonsList {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px; /* Adjust the max-width as needed */
+    margin: 0 auto;
+  }
+  
+  .lessons {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .lessonsTitle {
+    font-family: cursive;
+    font-size: 60px;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @media only screen and (max-width: 800px) {
+    .lessonsList {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .lessonsItem {
+      width: 100%;
+    }
+  }
+  

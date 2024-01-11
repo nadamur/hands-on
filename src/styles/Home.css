@@ -1,4 +1,5 @@
 .home {
+  text-align: center;
     width: 100%;
     height: 90vh;
     display: flex;
@@ -27,6 +28,7 @@
   }
   
   .headerContainer p {
+    font-family: cursive;
     padding: 0;
     font-size: 40px;
     font-weight: lighter;
