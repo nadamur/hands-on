@@ -20,7 +20,7 @@
   }
   
   .learnItem button {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-family: 'Dosis';
     font-size: large;
     background-color: #00234D;
     color: #fff;
@@ -59,7 +59,7 @@
   }
   
   .learnTitle {
-    font-family: cursive;
+    font-family: 'Bad Script';
     font-size: 60px;
   }
   

@@ -7,12 +7,14 @@ function Navbar() {
   return (
     <div className = "navbar">
         <div className='leftSide'>
-            <img src ={Logo} />
+            <h1 className='logo'>HANDS-ON</h1>
         </div>
         <div className='rightSide'>
-            <Link to="/"> Home </Link>
-            <Link to="/contact"> Contact Us</Link>
-            <Link to="/about">About</Link>
+            <a href='#'> Home </a>
+            <a href='#about'> About </a>
+            <a href='#features'> Features </a>
+            <a href='#whoWeAre'> Who We Are </a>
+            <a href='#contact'> Contact Us </a>
         </div>
     </div>
   )
