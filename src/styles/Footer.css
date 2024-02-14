@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
-  height: 200px;
-  background-color: #121619;
+  height: auto;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,12 +10,19 @@
 }
 
 .socialMedia img {
-    width: 60px;
+    width: 4vw;
     margin: 20px;
+    margin-top: 0px;
     font-size: 70px;
     cursor: pointer;
 }
 
+.socialMedia .thankYou{
+  width: 10vw;
+}
+
 .footer p {
-  color: white;
+  font-family: 'Raleway';
+  font-weight: bold;
+  color: black;
 }
