@@ -8,7 +8,7 @@ import Title from '../assets/TITLE.png';
 const Home = () => {
 
   return (
-    <div className='home' style={{ background: 'linear-gradient(to right, #E2D6F1, white)', backgroundPosition: '80% 20%' }}>
+    <div className='home' style={{ background: 'linear-gradient(to left, #E2D6F1 0%,#E2D6F1 10%, white 40%, white 100%)'}}>
       <div className='helloSection'>
         <div className='leftSide'>
           <img
@@ -23,6 +23,9 @@ const Home = () => {
           />
           <button>Get Started!</button>
         </div>
+      </div>
+      <div className="aboutSection" id="about">
+        
       </div>
 
     </div>
