@@ -20,6 +20,9 @@
 .helloSection .leftSide img{
   width: 25vw;
 }
+.helloSection .leftSide img:hover{
+  cursor: pointer;
+}
 
 .helloSection .rightSide {
   display: flex;
@@ -141,6 +144,9 @@
 .bestFriends img{
   height: auto;
   width: 15vw;
+}
+.bestFriends img:hover{
+  cursor: pointer;
 }
 .whoWeAre{
   position: relative;

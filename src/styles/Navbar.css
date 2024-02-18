@@ -4,6 +4,7 @@
   background-color: rgb(226, 214, 241);
   display: flex;
   flex-direction: row;
+  position: fixed;
 }
 
 .navbar .leftSide {

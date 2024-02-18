@@ -9,19 +9,28 @@ import Star from '../assets/star1.png';
 import TranslatorIMG from "../assets/Translator.png";
 import LessonsIMG from "../assets/Lessons.png";
 import TimeTrialsIMG from "../assets/TimeTrials.png";
-import BestFriendsIMG from '../assets/best_friends.gif';
+import BestFriendsGIF from '../assets/best_friends.gif';
+import BestFriendsIMG from '../assets/best_friends.jpg';
 import Team from '../assets/team.png';
 
 const Home = () => {
-  const playGIF = (IMG) =>{
-    
+  const [helloGifPlaying, setHelloGifPlaying] = useState(false);
+  const [bffGifPlaying, setBffGifPlaying] = useState(false);
+  const playGIF = (gif) =>{
+    if(gif==="hello"){
+      setHelloGifPlaying(prevState => !prevState);
+    }
+    else if (gif==="bff"){
+      setBffGifPlaying(prevState => !prevState);
+    }
   }
   return (
     <div className='home' style={{ background: 'linear-gradient(to left, #E2D6F1 0%,#E2D6F1 10%, white 40%, white 100%)'}}>
       <div className='helloSection'>
         <div className='leftSide'>
           <img
-            src={HelloIMG}
+            src={helloGifPlaying ? HelloGIF : HelloIMG}
+            onClick={() =>playGIF("hello")}
             alt='Hello ASL Sign'
           />
         </div>
@@ -50,7 +59,7 @@ const Home = () => {
           Start translating today and let's create a more connected and inclusive world together!
         </p>
       </div>
-      <div className="featuresSection">
+      <div className="featuresSection" id="features">
         <div className="featuresTitle">
           <img src={Star}/>
           <h3 className="title">FEATURES</h3>
@@ -74,10 +83,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="teamSection">
+      <div className="teamSection" id="team">
         <div className="teamHeader">
           <div className="bestFriends">
-            <img src={BestFriendsIMG}/>
+            <img src={bffGifPlaying ? BestFriendsGIF : BestFriendsIMG}
+            onClick={() =>playGIF("bff")}/>
             <p className="featuresBlockTitle">WE PRESENT ... THE TEAM!!!</p>
           </div>
           <div className="teamTitle">
