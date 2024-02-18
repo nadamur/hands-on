@@ -57,7 +57,7 @@
 }
 .title{
   position: relative;
-  font-size: 2vw;
+  font-size: 4vh;
   color: #655d5d;
   font-family: 'Gaegu';
   z-index: 2;
@@ -68,8 +68,9 @@
   width: 11vw;
   margin-top: -13vh;
 }
-.description{
+.aboutDescription{
   padding: 4vw;
+  font-size: 1.8vh;
   font-family: 'Raleway';
   font-weight: 300;
   margin: 0 20vw;
@@ -77,7 +78,83 @@
 }
 
 /* --------------FEATURES SECTION-------------- */
+.featuresTitle{
+  margin-top: 8vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+.featuresTitle img{
+  height: 7vh;
+  margin: -2vh 1vw;
+}
+.featuresBlocks{
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: row;
+}
+.featuresBlocks img{
+  width: 13vw;
+  height: auto;
+}
+.description{
+  font-size: 1.8vh;
+  font-family: 'Raleway';
+  font-weight: 300;
+}
+.ASLBlock,
+.LessonsBlocks,
+.TimeBlocks {
+  flex: 1; /* Each block takes up equal space */
+  margin: 0 5vw; /* Add margin between blocks */
+}
+.featuresBlockTitle{
+  margin-top: 1vh;
+  position: relative;
+  font-size: 3vh;
+  color: #655d5d;
+  font-family: 'Gaegu';
+  z-index: 2;
+}
 
+/* --------------TEAM SECTION-------------- */
+.teamSection{
+  margin-top: 10vh;
+}
+.teamHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.teamTitle{
+  text-align: left;
+  margin-left: 5vw;
+  position:relative;
+}
+.teamTitle img{
+  height: auto;
+  width: 15vw;
+  margin-left: -1vw;
+  position: absolute;
+  z-index: 1;
+}
+.bestFriends img{
+  height: auto;
+  width: 15vw;
+}
+.whoWeAre{
+  position: relative;
+  font-size: 4vh;
+  color: #655d5d;
+  font-family: 'Gaegu';
+  z-index: 2;
+  margin-top: 10vh;
+}
+.teamIMG{
+  margin-top: 3vh;
+  height: auto;
+  width: 50vw;
+}
 
 @media only screen and (max-width: 650px) {
   .home {
