@@ -1,4 +1,4 @@
-
+/* --------------WELCOME SECTION-------------- */
 .helloSection {
   text-align: center;
   width: 100%;
@@ -31,7 +31,6 @@
   width: 40vw;
 }
 .helloSection .rightSide button {
-  
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -40,15 +39,45 @@
   width: 11vw;
   color: white;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 2vh;
   font-family: 'Raleway';
-  margin-bottom: 30px;
+  margin-bottom: 4vh;
   margin-top: 4vh;
   margin-left: 15vw;
 }
 .helloSection .rightSide button:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* --------------ABOUT SECTION-------------- */
+.aboutTitle{
+  text-align: left;
+  margin-left: 5vw;
+  position:relative;
+}
+.title{
+  position: relative;
+  font-size: 2vw;
+  color: #655d5d;
+  font-family: 'Gaegu';
+  z-index: 2;
+}
+.aboutTitle img{
+  position: absolute;
+  z-index: 1;
+  width: 11vw;
+  margin-top: -13vh;
+}
+.description{
+  padding: 4vw;
+  font-family: 'Raleway';
+  font-weight: 300;
+  margin: 0 20vw;
+  text-align: left;
+}
+
+/* --------------FEATURES SECTION-------------- */
+
 
 @media only screen and (max-width: 650px) {
   .home {
