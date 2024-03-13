@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CameraImage from '../assets/cam.jpg';
 import '../styles/Translator.css';
 
 function Translator() {
@@ -13,7 +12,7 @@ function Translator() {
         <div className='translator-page'>
             <h1>Sign to your camera for a live translation</h1>
             <div className='translator'>
-                <img src={CameraImage} alt='ASL Time Trials'></img>
+                <img alt='ASL Time Trials'></img>
                 <div className='translation'>
                     <div className='language-buttons'>
                         <button className={currentLanguage === 'English' ? 'selected' : ''} onClick={() => handleLanguageChange('English')}>English</button>

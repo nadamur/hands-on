@@ -1,6 +1,8 @@
 import styles from "../styles/Home.css";
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+//navbar
+import NavbarHome from "../components/NavbarHome";
 //simax images
 import HelloGIF from '../assets/hello_no_background.gif';
 import HelloIMG from '../assets/hello_no_background.jpg';
@@ -25,6 +27,8 @@ const Home = () => {
     }
   }
   return (
+    <div>
+    <NavbarHome/>
     <div className='home' style={{ background: 'linear-gradient(to left, #E2D6F1 0%,#E2D6F1 10%, white 40%, white 100%)'}}>
       <div className='helloSection'>
         <div className='leftSide'>
@@ -100,6 +104,7 @@ const Home = () => {
         </div>
         <img src={Team} className="teamIMG"/>
       </div>
+    </div>
     </div>
   );
 };
