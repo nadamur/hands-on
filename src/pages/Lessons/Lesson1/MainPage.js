@@ -1,16 +1,13 @@
 import React from 'react';
 import '../styles/Lessons.css';
 import { Link } from 'react-router-dom';
-import Lesson1 from '../assets/lesson1.png';
-import Lesson2 from '../assets/lesson2.png';
-import Lesson3 from '../assets/lesson3.png';
+import Alphabet from '../assets/alphabet.png';
+import Intros from '../assets/introductions.png';
+import Farewells from '../assets/farewell.png';
 import Navbar from '../components/Navbar';
 
 
-function Lessons() {
-  function handleImgClick(src){
-    console.log(src);
-  }
+function Lesson1() {
     return (
       <div>
         <Navbar/>
@@ -19,17 +16,17 @@ function Lessons() {
           <div className='lessonsList'>
             
               <div className='lessonsItem'>
-                <img src={Lesson1} onClick={()=>{handleImgClick('1')}}></img>
+                <img src={Alphabet} ></img>
               </div>
             
             
               <div className='lessonsItem'>
-                <img src={Lesson2} onClick={()=>{handleImgClick('2')}}></img>
+                <img src={Intros}></img>
               </div>
            
             
             <div className='lessonsItem'>
-              <img src={Lesson3} onClick={()=>{handleImgClick('3')}}></img>
+              <img src={Farewells}></img>
             </div>
           </div>
         </div>
@@ -37,4 +34,4 @@ function Lessons() {
       );
 }
 
-export default Lessons;
+export default Lesson1;
