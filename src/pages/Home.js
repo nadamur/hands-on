@@ -14,8 +14,8 @@ import BestFriendsIMG from '../assets/best_friends.jpg';
 import Team from '../assets/team.png';
 
 const Home = () => {
-  const [helloGifPlaying, setHelloGifPlaying] = useState(false);
-  const [bffGifPlaying, setBffGifPlaying] = useState(false);
+  const [helloGifPlaying, setHelloGifPlaying] = useState(true);
+  const [bffGifPlaying, setBffGifPlaying] = useState(true);
   const playGIF = (gif) =>{
     if(gif==="hello"){
       setHelloGifPlaying(prevState => !prevState);
@@ -39,7 +39,10 @@ const Home = () => {
             src={Title}
             alt='Welcome to Hands-On Learning'
           />
-          <button>Get Started!</button>
+          <Link to='/lessons'>
+            <button>Get Started!</button>
+          </Link>
+
         </div>
       </div>
       <div className="aboutSection" id="about">
