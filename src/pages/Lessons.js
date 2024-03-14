@@ -8,9 +8,6 @@ import Navbar from '../components/Navbar';
 
 
 function Lessons() {
-  function handleImgClick(src){
-    console.log(src);
-  }
     return (
       <div>
         <Navbar/>
@@ -19,18 +16,23 @@ function Lessons() {
           <div className='lessonsList'>
             
               <div className='lessonsItem'>
-                <img src={Lesson1} onClick={()=>{handleImgClick('1')}}></img>
+                <Link to="/lesson1">
+                  <img src={Lesson1}></img>
+                </Link>
+                
               </div>
             
             
               <div className='lessonsItem'>
-                <img src={Lesson2} onClick={()=>{handleImgClick('2')}}></img>
+                <Link to="/lesson2">
+                  <img src={Lesson2}></img>
+                </Link>
               </div>
            
-            
+{/*             
             <div className='lessonsItem'>
               <img src={Lesson3} onClick={()=>{handleImgClick('3')}}></img>
-            </div>
+            </div> */}
           </div>
         </div>
         </div>

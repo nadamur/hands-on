@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/Lessons.css';
+import '../../../styles/Lessons.css';
 import { Link } from 'react-router-dom';
-import Alphabet from '../assets/alphabet.png';
-import Intros from '../assets/introductions.png';
-import Farewells from '../assets/farewell.png';
-import Navbar from '../components/Navbar';
+import Alphabet from '../../../assets/alphabet.png';
+import Intros from '../../../assets/introductions.png';
+import Farewells from '../../../assets/farewell.png';
+import Navbar from '../../../components/Navbar';
 
 
 function Lesson1() {
@@ -16,17 +16,24 @@ function Lesson1() {
           <div className='lessonsList'>
             
               <div className='lessonsItem'>
-                <img src={Alphabet} ></img>
+                <Link to="../lesson/1-Alphabet">
+                  <img src={Alphabet} ></img>
+                  <h1>Alphabet</h1>
+                </Link>   
               </div>
-            
             
               <div className='lessonsItem'>
-                <img src={Intros}></img>
+                <Link to="../lesson/1-Introductions">
+                  <img src={Intros}></img>
+                  <h1>Introductions</h1>
+                </Link>
               </div>
            
-            
             <div className='lessonsItem'>
-              <img src={Farewells}></img>
+              <Link to="../lesson/1-Farewell">
+                <img src={Farewells}></img>
+                <h1>Farewell</h1>
+              </Link>
             </div>
           </div>
         </div>

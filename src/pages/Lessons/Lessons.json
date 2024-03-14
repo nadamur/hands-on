@@ -1,0 +1,97 @@
+{
+    "lesson1": [
+        {
+            "title": "Alphabet",
+            "terms": [
+                "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+            ]
+        },
+        {
+            "title": "Introductions",
+            "terms": [
+                "My name is",
+                "What is your name?",
+                "Nice to meet you"
+            ]
+        },
+        {
+            "title": "Farewell",
+            "terms":[
+                "Goodbye",
+                "See you tomorrow",
+                "Today",
+                "Tomorrow",
+                "Day",
+                "Night"
+            ]
+        }
+
+    ],
+    "lesson2": [
+        {
+            "title": "Magic Words",
+            "terms": [
+                "Thank you",
+                "Please",
+                "Sorry",
+                "You're welcome"
+            ]
+        },
+        {
+            "title": "People",
+            "terms": [
+                "Mother",
+                "Father",
+                "Brother",
+                "Sister",
+                "Friend"
+            ]
+        },
+        {
+            "title": "Questions",
+            "terms":[
+                "Who",
+                "What",
+                "Where",
+                "Why",
+                "How",
+                "When",
+                "Want",
+                "Need",
+                "Have",
+                "Help",
+                "With",
+                "Washroom",
+                "Where is washroom?",
+                "Meeting",
+                "Water",
+                "Date"
+            ]
+        }
+
+    ],
+    "lesson3": [
+        {
+            "title": "Introductions",
+            "terms": [
+                "Studying",
+                "Engineering",
+                "Computer Science",
+                "English",
+                "I am in"
+            ]
+        },
+        {
+            "title": "Questions",
+            "terms": [
+            ]
+        },
+        {
+            "title": "Professor Questions",
+            "terms":[
+            ]
+        }
+
+    ]
+}
