@@ -8,6 +8,7 @@ import Translator from './pages/Translator';
 import Lesson1 from './pages/Lessons/Lesson1/MainPage';
 import Lesson2 from './pages/Lessons/Lesson2/MainPage';
 import Lesson from './pages/Lessons/Lesson';
+import Menu from './pages/Menu';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path = "/translator" exact element={<Translator />} />
           <Route path = "/lesson1" exact element={<Lesson1 />} />
           <Route path = "/lesson2" exact element={<Lesson2 />} />
+          <Route path = "/menu" exact element={<Menu />} />
         </Routes>
       </Router>
       <Footer />
