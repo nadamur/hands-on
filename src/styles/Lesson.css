@@ -1,0 +1,26 @@
+.lesson{
+    background-color: #FBF9FE;
+  }
+  .lesson h1{
+    font-family: 'Gaegu';
+  }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @media only screen and (max-width: 800px) {
+      .lessonsList {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .lessonsItem {
+        width: 100%;
+      }
+    }
+    

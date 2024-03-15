@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/Lessons.css';
+import '../../../styles/MainPage.css';
 import { Link } from 'react-router-dom';
 import Alphabet from '../../../assets/alphabet.png';
 import Intros from '../../../assets/introductions.png';
@@ -11,28 +11,28 @@ function Lesson1() {
     return (
       <div>
         <Navbar/>
-        <div className='lessons'>
+        <div className='mainPage'>
           <h1 className='lessonsTitle'>Click a Lesson to Get Started!</h1>
           <div className='lessonsList'>
             
-              <div className='lessonsItem'>
-                <Link to="../lesson/1-Alphabet">
+              <div className='mainPageItem'>
+                <Link to="../lesson/1-Alphabet" style={{ textDecoration: 'none' }}>
                   <img src={Alphabet} ></img>
-                  <h1>Alphabet</h1>
+                  <h1 style={{ color: 'black' }}>Alphabet</h1>
                 </Link>   
               </div>
             
-              <div className='lessonsItem'>
-                <Link to="../lesson/1-Introductions">
+              <div className='mainPageItem'>
+                <Link to="../lesson/1-Introductions" style={{ textDecoration: 'none' }}>
                   <img src={Intros}></img>
-                  <h1>Introductions</h1>
+                  <h1 style={{ color: 'black' }}>Introductions</h1>
                 </Link>
               </div>
            
-            <div className='lessonsItem'>
-              <Link to="../lesson/1-Farewell">
+            <div className='mainPageItem'>
+              <Link to="../lesson/1-Farewell" style={{ textDecoration: 'none' }}>
                 <img src={Farewells}></img>
-                <h1>Farewell</h1>
+                <h1 style={{ color: 'black' }}>Farewell</h1>
               </Link>
             </div>
           </div>
