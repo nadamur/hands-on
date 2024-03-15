@@ -14,14 +14,14 @@ function Lesson() {
     //terms
     const [terms, setTerms] = useState([]);
     //copied terms
-    const [copiedTerm, setCopiedTerm] = useState();
+    const [copiedTerms, setCopiedTerms] = useState([]);
     //typed Terms
-    const [typedTerm, setTypedTerm] = useState();
+    const [typedTerms, setTypedTerms] = useState([]);
     //finished Terms (won't be repeated)
     const [finishedTerms, setFinishedTerms] = useState([]);
     const [finishedText, setFinishedText] = useState('');
     //index of phase
-    const [currentPhaseIndex, setCurrenPhaseIndex] = useState(0);
+    const [currentPhaseIndex, setCurrentPhaseIndex] = useState(0);
     //phases -> 1- show video copy video. 2- show video type sign. 3- show text do sign
     const [phases, setPhases] = useState([]);
     useEffect(()=>{
@@ -61,50 +61,73 @@ function Lesson() {
     };
     const handleTermCopied = () =>{
       //add copied term
-      setCopiedTerm(terms[currentTermIndex]);
+      setCopiedTerms(prev => [...prev, terms[currentTermIndex]]);
     }
     const handleTermTyped = () =>{
       //add typed term, remove copied term
-      setTypedTerm(copiedTerm);
+      setTypedTerms(prev => [...prev, copiedTerms[0]]);
+      setCopiedTerms(prev => prev.slice(1));
     }
     const handleTermFinished = () =>{
-      setFinishedTerms(prev => [...prev, terms[currentTermIndex-1]]);
+      setFinishedTerms(prev => [...prev, typedTerms[0]]);
+      setTypedTerms(prev => prev.slice(1));
       if ((finishedTerms.length+1)===terms.length){
         setFinishedText('Congratulations! You finished your lesson.');
         setPhases(['Done']);
       }
     }
+    const handleNextPhase = () => {
+      const nextPhaseIndex = (currentPhaseIndex + 1) % phases.length;
+      //only move forward if terms exist
+      if (termsForPhaseExist(nextPhaseIndex)) {
+          setCurrentPhaseIndex(nextPhaseIndex);
+      }
+  };
+
+  const termsForPhaseExist = (phaseIndex) => {
+      switch (phaseIndex) {
+          case 0:
+              return terms.length > 0;
+          case 1:
+              return copiedTerms.length > 0;
+          case 2:
+              return typedTerms.length > 0;
+          default:
+              return true;
+      }
+  };
+
     return (
       <div className='lesson'>
-        <Navbar/>
-        <h1>Lesson {lessonID}</h1>
-        {phases[currentPhaseIndex]==='Copy the Sign Shown: ' &&(
-          <div>
-            <h1>{phases[currentPhaseIndex]}"{terms[currentTermIndex]}"</h1>
-            <button onClick={() =>{handleNextTerm(); handleTermCopied();setCurrenPhaseIndex(prevIndex => (prevIndex + 1) % phases.length);}}>Next Term</button>
-          </div>
-        )}
-        {phases[currentPhaseIndex]==='Type the Sign Shown: ' &&(
-          <div>
-            <h1>{phases[currentPhaseIndex]}"{copiedTerm}"</h1>
-            <button onClick={() =>{handleTermTyped();setCurrenPhaseIndex(prevIndex => (prevIndex + 1) % phases.length);}}>Next Term</button>
-          </div>
-        )}
-        {phases[currentPhaseIndex]==='Sign the Text Shown: ' &&(
-          <div>
-            <h1>{phases[currentPhaseIndex]}"{typedTerm}"</h1>
-            <button onClick={() =>{handleTermFinished();setCurrenPhaseIndex(prevIndex => (prevIndex + 1) % phases.length);}}>Next Term</button>
-          </div>
-        )}
-        {finishedText==='Congratulations! You finished your lesson.' &&(
-          <div>
-            <h1>{finishedText}</h1>
-          </div>
-        )}
+            <Navbar />
+            <h1>Lesson {lessonID}</h1>
+            {phases[currentPhaseIndex] === 'Copy the Sign Shown: ' && (
+                <div>
+                    <h1>{phases[currentPhaseIndex]}"{terms[currentTermIndex]}"</h1>
+                    <button onClick={() => { handleNextTerm(); handleTermCopied(); handleNextPhase();}}>Next Term</button>
+                </div>
+            )}
+            {phases[currentPhaseIndex] === 'Type the Sign Shown: ' && (
+                <div>
+                    <h1>{phases[currentPhaseIndex]}"{copiedTerms[0]}"</h1>
+                    <button onClick={() => { handleTermTyped(); handleNextPhase();}}>Next Term</button>
+                </div>
+            )}
+            {phases[currentPhaseIndex] === 'Sign the Text Shown: ' && (
+                <div>
+                    <h1>{phases[currentPhaseIndex]}"{typedTerms[0]}"</h1>
+                    <button onClick={() => { handleTermFinished(); handleNextPhase();}}>Next Term</button>
+                </div>
+            )}
+            {finishedText === 'Congratulations! You finished your lesson.' && (
+                <div>
+                    <h1>{finishedText}</h1>
+                </div>
+            )}
             <div>
-      <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
-      <pre>{predictionText}</pre>
-    </div>
+                <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
+                <pre>{predictionText}</pre>
+            </div>
         </div>
       );
 }
