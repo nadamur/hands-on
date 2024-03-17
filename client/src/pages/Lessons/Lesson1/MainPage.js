@@ -35,6 +35,12 @@ function Lesson1() {
                 <h1 style={{ color: 'black' }}>Farewell</h1>
               </Link>
             </div>
+            <div className='mainPageItem'>
+                <Link to="../lesson/3-Introductions" style={{ textDecoration: 'none' }}>
+                  <img src={Intros}></img>
+                  <h1 style={{ color: 'black' }}>TEST</h1>
+                </Link>
+              </div>
           </div>
         </div>
         </div>

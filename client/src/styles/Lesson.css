@@ -1,8 +1,32 @@
 .lesson{
     background-color: #FBF9FE;
   }
+  .lesson img{
+    border-radius: 10px;
+    margin: 30px;
+    height: 50vh;
+  }
   .lesson h1{
     font-family: 'Gaegu';
+  }
+  .lesson button{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(226, 214, 241);
+    height: 7vh;
+    width: 11vw;
+    color: white;
+    text-decoration: none;
+    font-size: 2vh;
+    font-family: 'Raleway';
+  }
+  .lesson input{
+    border: none;
+    border-radius: 5px;
+    font-family: 'Raleway';
+    height: 7vh;
+    width: 11vw;
   }
     @keyframes fadeIn {
       from {

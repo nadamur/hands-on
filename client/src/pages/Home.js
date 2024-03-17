@@ -43,7 +43,7 @@ const Home = () => {
             src={Title}
             alt='Welcome to Hands-On Learning'
           />
-          <Link to='/lessons'>
+          <Link to='/menu'>
             <button>Get Started!</button>
           </Link>
 

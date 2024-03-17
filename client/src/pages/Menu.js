@@ -4,12 +4,15 @@ import '../styles/Menu.css';
 import Translator from '../assets/Translator.png';
 import Lessons from '../assets/Lessons.png';
 import TimeTrials from "../assets/TimeTrials.png";
+import Navbar from '../components/Navbar';
 
 export default function Menu(){
     return(
             <div className="menu">
+                <Navbar />
                 <header2> START YOUR LEARNING JOURNEY</header2>
                 <div className = 'LearningOptions'>
+                    <Link to="../translator">
                     <div className = 'learningType'>
                         <button>
                             <img src = {Translator} alt = "translator"></img>
@@ -17,22 +20,16 @@ export default function Menu(){
                         <button> ASL TO ENGLISH TRANSLATOR</button>
                     
                     </div>
-
+                    </Link>
+                    <Link to="../lessons">
                     <div className = 'learningType'>
                         <button>
-                            <img src = {Lessons} alt = "translator"></img>
+                            <img src = {Lessons} alt = "lessons"></img>
                         </button>
                         <button> INTERACTIVE ASL LESSONS</button>
 
                     </div>
-
-                    <div className = 'learningType'>
-                        <button>
-                            <img src = {TimeTrials} alt = "translator"></img>
-                        </button>
-                        <button> TIME TRIALS</button>
-
-                    </div>
+                    </Link>
 
                 </div>
 

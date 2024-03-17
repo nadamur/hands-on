@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import { useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
+import TEST from '../../assets/test.gif'
 const lessonInfo = require('./Lessons.json');
 const ENDPOINT = 'http://127.0.0.1:5000';  // Update with your Flask server endpoint
 
 function Lesson() {
     const [currentTermIndex, setCurrentTermIndex] = useState(0);
     const [predictionText, setPredictionText] = useState('');
+    const [textInput, setTextInput] = useState('');
     const {lessonID} = useParams();
     //terms
     const [terms, setTerms] = useState([]);
@@ -34,9 +36,28 @@ function Lesson() {
       shuffleArray(terms);
       terms = terms.slice(0, 5);
       setTerms(terms);
-      console.log('tlength: ' + terms.length);
       setPhases(['Copy the Sign Shown: ', 'Type the Sign Shown: ', 'Sign the Text Shown: ']);
     }, [lessonID]);
+    useEffect(()=>{
+      //checking for phrases
+      //'What is your name?'
+      // --> 'your' --> 'name' --> 'what'
+      //'My name is'
+      // --> 'my' --> 'name'
+      //'Nice to meet you'
+      // 'nice' --> 'to meet' --> 'you'
+      //Where is washroom
+      // 'washroom' --> 'where'
+      if (phases[currentPhaseIndex] === 'Copy the Sign Shown: '){
+        if (predictionText.trim() === terms[currentTermIndex].toLowerCase().trim()){
+          handleNextTerm(); handleTermCopied(); handleNextPhase();
+        }
+      }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
+        if (predictionText.trim()===typedTerms[0].toLowerCase().trim()){
+          handleTermFinished(); handleNextPhase();
+        }
+      }
+    }, [predictionText]);
     useEffect(() => {
       const socket = socketIOClient(ENDPOINT);
       socket.on('connect', () => {
@@ -71,6 +92,8 @@ function Lesson() {
     const handleTermFinished = () =>{
       setFinishedTerms(prev => [...prev, typedTerms[0]]);
       setTypedTerms(prev => prev.slice(1));
+      console.log('finished length: ' + finishedTerms.length);
+      console.log('terms length: ' + terms.length);
       if ((finishedTerms.length+1)===terms.length){
         setFinishedText('Congratulations! You finished your lesson.');
         setPhases(['Done']);
@@ -83,6 +106,16 @@ function Lesson() {
           setCurrentPhaseIndex(nextPhaseIndex);
       }
   };
+  const handleInputChange = (event) => {
+    setTextInput(event.target.value);
+  };
+
+  const handleTermSubmit = () => {
+    if (textInput.toLowerCase().trim() === copiedTerms[0].toLowerCase().trim()){
+      handleTermTyped(); handleNextPhase();
+      setTextInput('');
+    }
+};
 
   const termsForPhaseExist = (phaseIndex) => {
       switch (phaseIndex) {
@@ -104,19 +137,27 @@ function Lesson() {
             {phases[currentPhaseIndex] === 'Copy the Sign Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{terms[currentTermIndex]}"</h1>
-                    <button onClick={() => { handleNextTerm(); handleTermCopied(); handleNextPhase();}}>Next Term</button>
+                    <img src={TEST}/>
+                    <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
                 </div>
             )}
             {phases[currentPhaseIndex] === 'Type the Sign Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{copiedTerms[0]}"</h1>
-                    <button onClick={() => { handleTermTyped(); handleNextPhase();}}>Next Term</button>
+                    <img src={TEST}/>
+                    <input 
+                      type='text' 
+                      placeholder='Input sign here...'
+                      value={textInput}
+                      onChange={handleInputChange}
+                    />
+                    <button onClick={() => { handleTermSubmit()}}>Submit</button>
                 </div>
             )}
             {phases[currentPhaseIndex] === 'Sign the Text Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{typedTerms[0]}"</h1>
-                    <button onClick={() => { handleTermFinished(); handleNextPhase();}}>Next Term</button>
+                    <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
                 </div>
             )}
             {finishedText === 'Congratulations! You finished your lesson.' && (
@@ -125,8 +166,7 @@ function Lesson() {
                 </div>
             )}
             <div>
-                <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
-                <pre>{predictionText}</pre>
+
             </div>
         </div>
       );
