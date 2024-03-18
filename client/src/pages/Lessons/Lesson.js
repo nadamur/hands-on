@@ -56,6 +56,41 @@ function Lesson() {
       'thank you': 'thank_you',
       "you're welcome": "youre_welcome",
       sorry: 'sorry',
+      //alphabet
+      a: 'a',
+      b: 'b',
+      c: 'c',
+      d: 'd',
+      e: 'e',
+      f: 'f',
+      g: 'g',
+      h: 'h',
+      i: 'i',
+      j: 'j',
+      k: 'k',
+      l: 'l',
+      m: 'm',
+      n: 'n',
+      o: 'o',
+      p: 'p',
+      q: 'q',
+      r: 'r',
+      s: 's',
+      t: 't',
+      u: 'u',
+      v: 'v',
+      w: 'w',
+      x: 'x',
+      y: 'y',
+      z: 'z',
+      "my name is": 'my_name_is',
+      "nice to meet you": 'nice_to_meet_you',
+      goodbye: 'goodbye',
+      'see you tomorrow': 'see_you_tomorrow',
+      today: 'today',
+      tomorrow: 'tomorrow',
+      day: 'day',
+      night: 'night'
     };
     useEffect(()=>{
       //get the lesson terms, scramble them
@@ -77,8 +112,8 @@ function Lesson() {
       // --> 'my' --> 'name'
       //'Nice to meet you'
       // 'nice' --> 'to meet' --> 'you'
-      //Where is washroom
-      // 'washroom' --> 'where'
+      
+
       if (phases[currentPhaseIndex] === 'Copy the Sign Shown: '){
         if (predictionText.trim() === terms[currentTermIndex].toLowerCase().trim()){
           handleNextTerm(); handleTermCopied(); handleNextPhase();
@@ -185,6 +220,7 @@ function Lesson() {
                       onChange={handleInputChange}
                     />
                     <button onClick={() => { handleTermSubmit()}}>Submit</button>
+                    <button onClick={() => { handleTermTyped(); handleNextPhase();}}>Next Term</button>
                 </div>
             )}
             {phases[currentPhaseIndex] === 'Sign the Text Shown: ' && (
@@ -197,6 +233,10 @@ function Lesson() {
             {finishedText === 'Congratulations! You finished your lesson.' && (
                 <div>
                     <h1>{finishedText}</h1>
+                    <Link to="/lessons">
+                      <button>Go back to lessons</button>
+                    </Link>
+                    
                 </div>
             )}
             <div>
