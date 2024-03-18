@@ -13,23 +13,24 @@
   font-family: 'Gaegu';
 }
 
-.LearningOptions {
-  display: flex;
+.menuItems {
+  text-decoration: none;  display: flex;
   flex-direction: row; /* Align items horizontally */
   align-items: center;
   justify-content: center; /* Center content horizontally */
   flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
 }
-
-.learningType {
+.menuItem {
   text-align: center;
   margin-bottom: 20px; /* Adjust the spacing between items */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.learningType button {
+.menuTitle{
+  margin-top: 4vh;
+}
+.menuItem button {
   text-decoration: none;
   margin-top: 30px; /* Adjust the spacing between buttons */
   margin-bottom: 25px;
@@ -40,7 +41,7 @@
   font-weight: 700;
 }
 
-.learningType img{
+.menuItem img{
   cursor: pointer;
   box-shadow: none;
   border: none; /* Reset any border styles */
@@ -52,7 +53,7 @@
   animation-delay: 0.5s; /* Delay the animation for the image */
 }
 
-.learningType button:hover{
+.menuItem button:hover{
   transition: 0.3s ease-out;
   border-radius: 4px;
   opacity: 0.7;

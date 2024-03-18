@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import { useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
-import TEST from '../../assets/test.gif'
+import TEST from '../../assets/test.gif';
+import * as gifs from '../../assets/GIFs';
 const lessonInfo = require('./Lessons.json');
 const ENDPOINT = 'http://127.0.0.1:5000';  // Update with your Flask server endpoint
 
@@ -26,6 +27,36 @@ function Lesson() {
     const [currentPhaseIndex, setCurrentPhaseIndex] = useState(0);
     //phases -> 1- show video copy video. 2- show video type sign. 3- show text do sign
     const [phases, setPhases] = useState([]);
+    //gif names
+    const gifNames = {
+      //people
+      brother: 'brother',
+      sister: 'sister',
+      father: 'father',
+      friend: 'friend',
+      mother: 'mother',
+      //questions
+      who: 'who',
+      what: 'what',
+      where: 'where',
+      why: 'why',
+      how: 'how',
+      when: 'when',
+      //basics
+      want: 'want',
+      need: 'need',
+      have: 'have',
+      help: 'help',
+      with: 'with',
+      washroom: 'washroom',
+      meeting: 'meeting',
+      water: 'water',
+      //magic words
+      please: 'please',
+      'thank you': 'thank_you',
+      "you're welcome": "youre_welcome",
+      sorry: 'sorry',
+    };
     useEffect(()=>{
       //get the lesson terms, scramble them
       const str = lessonID.split("-");
@@ -106,6 +137,7 @@ function Lesson() {
           setCurrentPhaseIndex(nextPhaseIndex);
       }
   };
+
   const handleInputChange = (event) => {
     setTextInput(event.target.value);
   };
@@ -137,14 +169,15 @@ function Lesson() {
             {phases[currentPhaseIndex] === 'Copy the Sign Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{terms[currentTermIndex]}"</h1>
-                    <img src={TEST}/>
+                    <img src={gifs[gifNames[terms[currentTermIndex].toLowerCase()]]}/>
                     <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
+                    <button onClick={() => { handleNextTerm(); handleTermCopied(); handleNextPhase();}}>Next Term</button>
                 </div>
             )}
             {phases[currentPhaseIndex] === 'Type the Sign Shown: ' && (
                 <div>
-                    <h1>{phases[currentPhaseIndex]}"{copiedTerms[0]}"</h1>
-                    <img src={TEST}/>
+                    <h1>{phases[currentPhaseIndex]}</h1>
+                    <img src={gifs[gifNames[copiedTerms[0].toLowerCase()]]}/>
                     <input 
                       type='text' 
                       placeholder='Input sign here...'
@@ -158,6 +191,7 @@ function Lesson() {
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{typedTerms[0]}"</h1>
                     <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
+                    <button onClick={() => { handleTermFinished(); handleNextPhase();}}>Next Term</button>
                 </div>
             )}
             {finishedText === 'Congratulations! You finished your lesson.' && (

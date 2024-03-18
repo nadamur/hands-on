@@ -10,10 +10,10 @@ export default function Menu(){
     return(
             <div className="menu">
                 <Navbar />
-                <header2> START YOUR LEARNING JOURNEY</header2>
-                <div className = 'LearningOptions'>
-                    <Link to="../translator">
-                    <div className = 'learningType'>
+                <h1 className='menuTitle'> START YOUR LEARNING JOURNEY!</h1>
+                <div className = 'menuItems'>
+                    <Link to="../translator" style={{ textDecoration: 'none' }}>
+                    <div className = 'menuItem'>
                         <button>
                             <img src = {Translator} alt = "translator"></img>
                         </button>
@@ -21,8 +21,8 @@ export default function Menu(){
                     
                     </div>
                     </Link>
-                    <Link to="../lessons">
-                    <div className = 'learningType'>
+                    <Link to="../lessons" style={{ textDecoration: 'none' }}>
+                    <div className = 'menuItem'>
                         <button>
                             <img src = {Lessons} alt = "lessons"></img>
                         </button>
