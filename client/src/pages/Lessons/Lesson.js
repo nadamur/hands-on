@@ -14,6 +14,11 @@ function Lesson() {
     const [predictionText, setPredictionText] = useState('');
     const [textInput, setTextInput] = useState('');
     const {lessonID} = useParams();
+    //for phrases
+    const [phrase1, setPhrase1] = useState(['your', 'name', 'what']);
+    const [phrase2, setPhrase2] = useState(['my', 'name']);
+    const [phrase3, setPhrase3] = useState(['nice', 'to meet', 'you']);
+    const [currentPhrase, setCurrentPhrase] = useState('');
     //terms
     const [terms, setTerms] = useState([]);
     //copied terms
@@ -106,21 +111,103 @@ function Lesson() {
     }, [lessonID]);
     useEffect(()=>{
       //checking for phrases
-      //'What is your name?'
-      // --> 'your' --> 'name' --> 'what'
-      //'My name is'
-      // --> 'my' --> 'name'
       //'Nice to meet you'
       // 'nice' --> 'to meet' --> 'you'
-      
-
       if (phases[currentPhaseIndex] === 'Copy the Sign Shown: '){
-        if (predictionText.trim() === terms[currentTermIndex].toLowerCase().trim()){
-          handleNextTerm(); handleTermCopied(); handleNextPhase();
+        //if this phase, conditionally check phrase
+        if (terms[currentTermIndex].toLowerCase().trim()==='what is your name?'){
+          if (predictionText.trim() === 'your'){
+            //append to currentPhrase only if currentPhrase is empty
+            if (currentPhrase === ''){
+              setCurrentPhrase('your');
+            }
+          }
+          //check for 'name'
+          if (predictionText.trim() === 'name'){
+            //append to currentPhrase only if currentPhrase is only 'your'
+            if (currentPhrase === 'your'){
+              setCurrentPhrase('your name');
+            }
+          }
+          //check for 'what'
+          if (predictionText.trim() === 'what'){
+            //if already signed 'your name', move on to next work, reset current phrase
+            if (currentPhrase === 'your name'){
+              setCurrentPhrase('');
+              handleNextTerm(); handleTermCopied(); handleNextPhase();
+            }
+          }
         }
-      }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
-        if (predictionText.trim()===typedTerms[0].toLowerCase().trim()){
-          handleTermFinished(); handleNextPhase();
+        //if this phase, conditionally check phrase
+        if (terms[currentTermIndex].toLowerCase().trim()==='my name is'){
+          if (predictionText.trim() === 'my'){
+            //append to currentPhrase only if currentPhrase is empty
+            if (currentPhrase === ''){
+              setCurrentPhrase('my');
+            }
+          }
+          //check for 'name'
+          if (predictionText.trim() === 'name'){
+            //append to currentPhrase only if currentPhrase is only 'your'
+            if (currentPhrase === 'my'){
+              setCurrentPhrase('');
+              handleNextTerm(); handleTermCopied(); handleNextPhase();
+            }
+          }
+        }
+        else{
+          //not one of the phrases
+          if (predictionText.trim() === terms[currentTermIndex].toLowerCase().trim()){
+            handleNextTerm(); handleTermCopied(); handleNextPhase();
+          } 
+        }
+
+        }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
+          //if this phase, conditionally check phrase
+          if (typedTerms[0].toLowerCase().trim()==='what is your name'){
+            if (predictionText.trim() === 'your'){
+              //append to currentPhrase only if currentPhrase is empty
+              if (currentPhrase === ''){
+                setCurrentPhrase('your');
+              }
+            }
+            //check for 'name'
+            if (predictionText.trim() === 'name'){
+              //append to currentPhrase only if currentPhrase is only 'your'
+              if (currentPhrase === 'your'){
+                setCurrentPhrase('your name');
+              }
+            }
+            //check for 'what'
+            if (predictionText.trim() === 'what'){
+              //if already signed 'your name', move on to next work, reset current phrase
+              if (currentPhrase === 'your name'){
+                setCurrentPhrase('');
+                handleTermFinished(); handleNextPhase();
+              }
+            }
+          }
+          else if (typedTerms[0].toLowerCase().trim()==='my name is'){
+            if (predictionText.trim() === 'my'){
+              //append to currentPhrase only if currentPhrase is empty
+              if (currentPhrase === ''){
+                setCurrentPhrase('my');
+              }
+            }
+            //check for 'name'
+            if (predictionText.trim() === 'name'){
+              //append to currentPhrase only if currentPhrase is only 'your'
+              if (currentPhrase === 'my'){
+                setCurrentPhrase('');
+                handleTermFinished(); handleNextPhase();
+              }
+            }
+          }
+          // not phrase
+          else{
+            if (predictionText.trim()===typedTerms[0].toLowerCase().trim()){
+            handleTermFinished(); handleNextPhase();
+          }
         }
       }
     }, [predictionText]);
