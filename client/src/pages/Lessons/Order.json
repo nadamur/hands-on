@@ -1,0 +1,22 @@
+{
+    "terms":{
+        
+            "What is your name?": [
+                "your",
+                "name",
+                "what"
+            ],
+        
+        
+            "See you tomorrow": [
+                "see",
+                "tomorrow"
+            ],
+        
+        
+            "My name is": [
+                "my",
+                "name"
+            ]
+        }
+}

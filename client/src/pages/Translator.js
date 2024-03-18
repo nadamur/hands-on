@@ -34,7 +34,7 @@ function Translator() {
         };
       }, []);  
       useEffect(()=>{
-        setTranslation(prevTranslation => prevTranslation + predictionText);
+        setTranslation(prevTranslation => prevTranslation + predictionText + " ");
       }, [predictionText])
 
     return (

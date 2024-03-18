@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import { useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
-import TEST from '../../assets/test.gif';
 import * as gifs from '../../assets/GIFs';
 const lessonInfo = require('./Lessons.json');
+const orderInfo = require('./Order.json');
 const ENDPOINT = 'http://127.0.0.1:5000';  // Update with your Flask server endpoint
 
 function Lesson() {
@@ -15,10 +15,8 @@ function Lesson() {
     const [textInput, setTextInput] = useState('');
     const {lessonID} = useParams();
     //for phrases
-    const [phrase1, setPhrase1] = useState(['your', 'name', 'what']);
-    const [phrase2, setPhrase2] = useState(['my', 'name']);
-    const [phrase3, setPhrase3] = useState(['nice', 'to meet', 'you']);
-    const [currentPhrase, setCurrentPhrase] = useState('');
+    const [currentPhrase, setCurrentPhrase] = useState([]);
+    const [phraseIndex, setPhraseIndex] = useState(0);
     //terms
     const [terms, setTerms] = useState([]);
     //copied terms
@@ -110,106 +108,62 @@ function Lesson() {
       setPhases(['Copy the Sign Shown: ', 'Type the Sign Shown: ', 'Sign the Text Shown: ']);
     }, [lessonID]);
     useEffect(()=>{
-      //checking for phrases
-      //'Nice to meet you'
-      // 'nice' --> 'to meet' --> 'you'
+      console.log('INDEX: ' + phraseIndex);
+      console.log('WORD: ' + currentPhrase[phraseIndex]);
       if (phases[currentPhaseIndex] === 'Copy the Sign Shown: '){
-        //if this phase, conditionally check phrase
-        if (terms[currentTermIndex].toLowerCase().trim()==='what is your name?'){
-          if (predictionText.trim() === 'your'){
-            //append to currentPhrase only if currentPhrase is empty
-            if (currentPhrase === ''){
-              setCurrentPhrase('your');
-            }
+        //check if term is a phrase
+        if(orderInfo.terms.hasOwnProperty(terms[currentTermIndex])){
+          console.log('PHRASE');
+          //if term is a phrase, extract its words
+          let words = orderInfo.terms[terms[currentTermIndex]];
+          //if no current phrase set, set the current phrase
+          //start with first word
+          if (currentPhrase.length === 0){
+            setCurrentPhrase(words);
           }
-          //check for 'name'
-          if (predictionText.trim() === 'name'){
-            //append to currentPhrase only if currentPhrase is only 'your'
-            if (currentPhrase === 'your'){
-              setCurrentPhrase('your name');
-            }
-          }
-          //check for 'what'
-          if (predictionText.trim() === 'what'){
-            //if already signed 'your name', move on to next work, reset current phrase
-            if (currentPhrase === 'your name'){
-              setCurrentPhrase('');
+          if (predictionText.trim() === currentPhrase[phraseIndex]){
+            console.log('NEXT INDEX');
+            setPhraseIndex(prev => prev + 1);
+            if (phraseIndex===currentPhrase.length){
+              console.log('here');
+              setCurrentPhrase([]);
+              setPhraseIndex(0);
               handleNextTerm(); handleTermCopied(); handleNextPhase();
             }
           }
         }
-        //if this phase, conditionally check phrase
-        if (terms[currentTermIndex].toLowerCase().trim()==='my name is'){
-          if (predictionText.trim() === 'my'){
-            //append to currentPhrase only if currentPhrase is empty
-            if (currentPhrase === ''){
-              setCurrentPhrase('my');
-            }
+        //not a phrase
+        else{
+          if (predictionText.toLowerCase().trim() === terms[currentTermIndex].toLowerCase().trim()){
+          handleNextTerm(); handleTermCopied(); handleNextPhase();
+        } 
+      }
+      }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
+        if(orderInfo.terms.hasOwnProperty(typedTerms[0])){
+          console.log('PHRASE');
+          //if term is a phrase, extract its words
+          let words = orderInfo.terms[typedTerms[0]];
+          //if no current phrase set, set the current phrase
+          //start with first word
+          if (currentPhrase.length === 0){
+            setCurrentPhrase(words);
           }
-          //check for 'name'
-          if (predictionText.trim() === 'name'){
-            //append to currentPhrase only if currentPhrase is only 'your'
-            if (currentPhrase === 'my'){
-              setCurrentPhrase('');
-              handleNextTerm(); handleTermCopied(); handleNextPhase();
+          if (predictionText.toLowerCase().trim() === currentPhrase[phraseIndex]){
+            console.log('NEXT INDEX');
+            setPhraseIndex(prev => prev++);
+            if (phraseIndex===currentPhrase.length){
+              handleTermFinished(); handleNextPhase();
+              setCurrentPhrase([]);
+              setPhraseIndex(0);
             }
           }
         }
         else{
-          //not one of the phrases
-          if (predictionText.trim() === terms[currentTermIndex].toLowerCase().trim()){
-            handleNextTerm(); handleTermCopied(); handleNextPhase();
-          } 
-        }
-
-        }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
-          //if this phase, conditionally check phrase
-          if (typedTerms[0].toLowerCase().trim()==='what is your name'){
-            if (predictionText.trim() === 'your'){
-              //append to currentPhrase only if currentPhrase is empty
-              if (currentPhrase === ''){
-                setCurrentPhrase('your');
-              }
-            }
-            //check for 'name'
-            if (predictionText.trim() === 'name'){
-              //append to currentPhrase only if currentPhrase is only 'your'
-              if (currentPhrase === 'your'){
-                setCurrentPhrase('your name');
-              }
-            }
-            //check for 'what'
-            if (predictionText.trim() === 'what'){
-              //if already signed 'your name', move on to next work, reset current phrase
-              if (currentPhrase === 'your name'){
-                setCurrentPhrase('');
-                handleTermFinished(); handleNextPhase();
-              }
-            }
-          }
-          else if (typedTerms[0].toLowerCase().trim()==='my name is'){
-            if (predictionText.trim() === 'my'){
-              //append to currentPhrase only if currentPhrase is empty
-              if (currentPhrase === ''){
-                setCurrentPhrase('my');
-              }
-            }
-            //check for 'name'
-            if (predictionText.trim() === 'name'){
-              //append to currentPhrase only if currentPhrase is only 'your'
-              if (currentPhrase === 'my'){
-                setCurrentPhrase('');
-                handleTermFinished(); handleNextPhase();
-              }
-            }
-          }
-          // not phrase
-          else{
-            if (predictionText.trim()===typedTerms[0].toLowerCase().trim()){
+          if (predictionText.toLowerCase().trim()===typedTerms[0].toLowerCase().trim()){
             handleTermFinished(); handleNextPhase();
           }
         }
-      }
+    }
     }, [predictionText]);
     useEffect(() => {
       const socket = socketIOClient(ENDPOINT);
@@ -314,7 +268,7 @@ function Lesson() {
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{typedTerms[0]}"</h1>
                     <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
-                    <button onClick={() => { handleTermFinished(); handleNextPhase();}}>Next Term</button>
+                    {/* <button onClick={() => { handleTermFinished(); handleNextPhase();}}>Next Term</button> */}
                 </div>
             )}
             {finishedText === 'Congratulations! You finished your lesson.' && (
