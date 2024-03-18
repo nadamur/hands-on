@@ -110,10 +110,10 @@ function Lesson() {
     useEffect(()=>{
       console.log('INDEX: ' + phraseIndex);
       console.log('WORD: ' + currentPhrase[phraseIndex]);
+      console.log("lengtH: " + currentPhrase.length);
       if (phases[currentPhaseIndex] === 'Copy the Sign Shown: '){
         //check if term is a phrase
         if(orderInfo.terms.hasOwnProperty(terms[currentTermIndex])){
-          console.log('PHRASE');
           //if term is a phrase, extract its words
           let words = orderInfo.terms[terms[currentTermIndex]];
           //if no current phrase set, set the current phrase
@@ -121,15 +121,17 @@ function Lesson() {
           if (currentPhrase.length === 0){
             setCurrentPhrase(words);
           }
-          if (predictionText.trim() === currentPhrase[phraseIndex]){
-            console.log('NEXT INDEX');
-            setPhraseIndex(prev => prev + 1);
+          if (currentPhrase.length != 0){
             if (phraseIndex===currentPhrase.length){
-              console.log('here');
               setCurrentPhrase([]);
               setPhraseIndex(0);
               handleNextTerm(); handleTermCopied(); handleNextPhase();
             }
+          }
+          
+          if (predictionText.trim() === currentPhrase[phraseIndex]){
+            console.log('NEXT INDEX');
+            setPhraseIndex(prev => prev + 1);
           }
         }
         //not a phrase
