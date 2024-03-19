@@ -35,12 +35,12 @@ function Lesson1() {
                 <h1 style={{ color: 'black' }}>Questions</h1>
               </Link>
             </div>
-            <div className='mainPageItem'>
+            {/* <div className='mainPageItem'>
               <Link to="../lesson/3-Introductions" style={{ textDecoration: 'none' }}>
                 <img src={Question}></img>
                 <h1 style={{ color: 'black' }}>TEST</h1>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         </div>

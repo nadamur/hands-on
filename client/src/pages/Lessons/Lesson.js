@@ -121,13 +121,13 @@ function Lesson() {
           }
           if (currentPhrase.length != 0){
             if (phraseIndex===currentPhrase.length){
+              setFinishedText("Good job!");
+              setInterval(() => {
+                setFinishedText(""); 
+              }, 4000);
               setCurrentPhrase([]);
               setPhraseIndex(0);
               handleNextTerm(); handleTermCopied(); handleNextPhase();
-              setFinishedTerms("Good job!");
-              setInterval(() => {
-                setFinishedTerms(""); 
-              }, 2000);
             }
           }
           
@@ -138,7 +138,11 @@ function Lesson() {
         //not a phrase
         else{
           if (predictionText.toLowerCase().trim() === terms[currentTermIndex].toLowerCase().trim()){
-          handleNextTerm(); handleTermCopied(); handleNextPhase();
+            setFinishedText("Good job!");
+            setInterval(() => {
+              setFinishedText(""); 
+            }, 4000);
+            handleNextTerm(); handleTermCopied(); handleNextPhase();
         } 
       }
       }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
@@ -153,6 +157,10 @@ function Lesson() {
           if (predictionText.toLowerCase().trim() === currentPhrase[phraseIndex]){
             setPhraseIndex(prev => prev++);
             if (phraseIndex===currentPhrase.length){
+              setFinishedText("Good job!");
+              setInterval(() => {
+                setFinishedText(""); 
+              }, 4000);
               handleTermFinished(); handleNextPhase();
               setCurrentPhrase([]);
               setPhraseIndex(0);
@@ -162,6 +170,10 @@ function Lesson() {
         else{
           if (predictionText.toLowerCase().trim()===typedTerms[0].toLowerCase().trim()){
             handleTermFinished(); handleNextPhase();
+            setFinishedText("Good job!");
+            setInterval(() => {
+              setFinishedText(""); 
+            }, 4000);
           }
         }
     }
@@ -185,6 +197,9 @@ function Lesson() {
         socket.disconnect();
       };
     }, []);  
+    useEffect(()=>{
+      console.log('finished text: ' + finishedText);
+    }, [finishedText]);
     const handleNextTerm = () => { 
       setCurrentTermIndex(prevIndex => (prevIndex + 1) % terms.length);
     };
@@ -246,6 +261,7 @@ function Lesson() {
             {phases[currentPhaseIndex] === 'Copy the Sign Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{terms[currentTermIndex]}"</h1>
+                    <h1>{finishedText}</h1>
                     <img src={gifs[gifNames[terms[currentTermIndex].toLowerCase()]]}/>
                     <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
                     {/* <button onClick={() => { handleNextTerm(); handleTermCopied(); handleNextPhase();}}>Next Term</button> */}
@@ -254,6 +270,7 @@ function Lesson() {
             {phases[currentPhaseIndex] === 'Type the Sign Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}</h1>
+                    <h1>{finishedText}</h1>
                     <img src={gifs[gifNames[copiedTerms[0].toLowerCase()]]}/>
                     <input 
                       type='text' 
@@ -268,6 +285,7 @@ function Lesson() {
             {phases[currentPhaseIndex] === 'Sign the Text Shown: ' && (
                 <div>
                     <h1>{phases[currentPhaseIndex]}"{typedTerms[0]}"</h1>
+                    <h1>{finishedText}</h1>
                     <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
                     {/* <button onClick={() => { handleTermFinished(); handleNextPhase();}}>Next Term</button> */}
                 </div>
