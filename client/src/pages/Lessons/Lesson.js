@@ -237,7 +237,16 @@ function Lesson() {
   const handleTermSubmit = () => {
     if (textInput.toLowerCase().trim() === copiedTerms[0].toLowerCase().trim()){
       handleTermTyped(); handleNextPhase();
+      setFinishedText("Good job!");
+      setInterval(() => {
+        setFinishedText(""); 
+      }, 4000);
       setTextInput('');
+    }else{
+      setFinishedText("Incorrect! Try again");
+      setInterval(() => {
+        setFinishedText('');
+      }, 4000);
     }
 };
 
