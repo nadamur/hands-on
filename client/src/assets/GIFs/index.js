@@ -59,7 +59,7 @@ export { default as z } from './Z.gif';
 //intros
 export { default as my_name_is } from './My_Name_Is.gif';
 export { default as nice_to_meet_you } from './Nice_to_meet_you.gif';
-// missing: 'what is your name'
+export { default as what_is_your_name} from './What is your name.gif'
 
 //farewell
 export { default as goodbye } from './Goodbye.gif';

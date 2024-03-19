@@ -87,6 +87,7 @@ function Lesson() {
       y: 'y',
       z: 'z',
       "my name is": 'my_name_is',
+      'what is your name?' : 'what_is_your_name',
       "nice to meet you": 'nice_to_meet_you',
       goodbye: 'goodbye',
       'see you tomorrow': 'see_you_tomorrow',
@@ -108,9 +109,6 @@ function Lesson() {
       setPhases(['Copy the Sign Shown: ', 'Type the Sign Shown: ', 'Sign the Text Shown: ']);
     }, [lessonID]);
     useEffect(()=>{
-      console.log('INDEX: ' + phraseIndex);
-      console.log('WORD: ' + currentPhrase[phraseIndex]);
-      console.log("lengtH: " + currentPhrase.length);
       if (phases[currentPhaseIndex] === 'Copy the Sign Shown: '){
         //check if term is a phrase
         if(orderInfo.terms.hasOwnProperty(terms[currentTermIndex])){
@@ -126,11 +124,14 @@ function Lesson() {
               setCurrentPhrase([]);
               setPhraseIndex(0);
               handleNextTerm(); handleTermCopied(); handleNextPhase();
+              setFinishedTerms("Good job!");
+              setInterval(() => {
+                setFinishedTerms(""); 
+              }, 2000);
             }
           }
           
           if (predictionText.trim() === currentPhrase[phraseIndex]){
-            console.log('NEXT INDEX');
             setPhraseIndex(prev => prev + 1);
           }
         }
@@ -142,7 +143,6 @@ function Lesson() {
       }
       }else if (phases[currentPhaseIndex] === 'Sign the Text Shown: '){
         if(orderInfo.terms.hasOwnProperty(typedTerms[0])){
-          console.log('PHRASE');
           //if term is a phrase, extract its words
           let words = orderInfo.terms[typedTerms[0]];
           //if no current phrase set, set the current phrase
@@ -151,7 +151,6 @@ function Lesson() {
             setCurrentPhrase(words);
           }
           if (predictionText.toLowerCase().trim() === currentPhrase[phraseIndex]){
-            console.log('NEXT INDEX');
             setPhraseIndex(prev => prev++);
             if (phraseIndex===currentPhrase.length){
               handleTermFinished(); handleNextPhase();
@@ -166,7 +165,7 @@ function Lesson() {
           }
         }
     }
-    }, [predictionText]);
+    }, [predictionText, phraseIndex]);
     useEffect(() => {
       const socket = socketIOClient(ENDPOINT);
       socket.on('connect', () => {
@@ -249,7 +248,7 @@ function Lesson() {
                     <h1>{phases[currentPhaseIndex]}"{terms[currentTermIndex]}"</h1>
                     <img src={gifs[gifNames[terms[currentTermIndex].toLowerCase()]]}/>
                     <img src="http://127.0.0.1:5000/video_feed" alt="Prediction" />
-                    <button onClick={() => { handleNextTerm(); handleTermCopied(); handleNextPhase();}}>Next Term</button>
+                    {/* <button onClick={() => { handleNextTerm(); handleTermCopied(); handleNextPhase();}}>Next Term</button> */}
                 </div>
             )}
             {phases[currentPhaseIndex] === 'Type the Sign Shown: ' && (
@@ -263,7 +262,7 @@ function Lesson() {
                       onChange={handleInputChange}
                     />
                     <button onClick={() => { handleTermSubmit()}}>Submit</button>
-                    <button onClick={() => { handleTermTyped(); handleNextPhase();}}>Next Term</button>
+                    {/* <button onClick={() => { handleTermTyped(); handleNextPhase();}}>Next Term</button> */}
                 </div>
             )}
             {phases[currentPhaseIndex] === 'Sign the Text Shown: ' && (
